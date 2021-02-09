@@ -9,7 +9,7 @@
     >
       <loading :value="loading"/>
       <v-list-item two-line class="profile-bg" v-if="user">
-        <v-list-item-avatar size="60" class="mr-1">
+        <v-list-item-avatar size="60" class="mr-1 my-0">
           <img src="../../../assets/images/avatars/avatar16.svg"/>
         </v-list-item-avatar>
         <v-list-item-content class="white--text">
