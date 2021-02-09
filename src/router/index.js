@@ -10,6 +10,7 @@ import auth from '@/modules/auth/router'
 //Rutas Externas
 import usuarios from '@/modules/usuarios/router'
 import roles from '@/modules/roles/router'
+import caracterizacion from '@/modules/caracterizacion/router'
 
 Vue.use(VueRouter)
 
@@ -19,7 +20,8 @@ const routes = [
   auth,
   //Rutas Externas
   usuarios,
-  roles
+  roles,
+  caracterizacion
 ]
 
 const router = new VueRouter({

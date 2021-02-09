@@ -9,6 +9,7 @@ const getters = {
     itemsMenu: (state, getters) => {
         let menuPrincipal = []
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'inicio'))
+        if(getters.permisoName('encuestas-caracterizacion.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'encuestasCaracterizacion'))
         if(getters.permisoName('usuarios.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
         if(getters.permisoName('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
         return menuPrincipal

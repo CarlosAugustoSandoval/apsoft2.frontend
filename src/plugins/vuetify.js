@@ -3,7 +3,7 @@ import Vuetify from 'vuetify/lib/framework'
 import es from 'vuetify/es5/locale/es'
 import theme from './theme'
 
-Vue.use(Vuetify);
+Vue.use(Vuetify)
 
 export default new Vuetify({
     rtl: theme.isRTL,

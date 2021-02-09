@@ -13,6 +13,10 @@ export default {
   components: {
     Customizer
   },
+  created() {
+    this.$store.dispatch('getComplementos')
+    this.$store.dispatch('getComplementosCaraterizacion')
+  }
 }
 </script>
 

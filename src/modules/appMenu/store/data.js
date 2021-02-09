@@ -26,5 +26,14 @@ export const itemsMenu = [
         color: 'blue',
         routeName: 'Roles',
         typeRoute: 'administrativo'
+    },
+    {
+        id: 'encuestasCaracterizacion',
+        title: 'Encuestas',
+        subtitle: 'Caracterización',
+        icon: 'mdi-card-account-details',
+        color: 'purple',
+        routeName: 'EncuestasCaracterizacion',
+        typeRoute: 'caracterizacion'
     }
 ]

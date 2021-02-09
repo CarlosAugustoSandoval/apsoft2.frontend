@@ -50,7 +50,7 @@
 <script>
 
 export default {
-name: 'CardsList',
+name: 'List',
   props: {
     itemsMenu: {
       type: Array,
