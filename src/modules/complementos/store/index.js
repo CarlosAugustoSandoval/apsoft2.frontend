@@ -5,7 +5,11 @@ const state = {
     tiposIdentificacion: [],
     departamentos: [],
     municipios: [],
-    parentescos: []
+    parentescos: [],
+    zonas: [
+        { text: 'Urbana', value: 'Urbana'},
+        { text: 'Rural', value: 'Rural'}
+    ],
 }
 
 // getters
@@ -18,6 +22,9 @@ const getters = {
     },
     municipios: state => {
         return state.municipios
+    },
+    zonas: state => {
+        return state.zonas
     },
     parentescos: state => {
         return state.parentescos

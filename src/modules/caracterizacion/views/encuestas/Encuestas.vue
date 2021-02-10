@@ -5,7 +5,7 @@
         <v-spacer></v-spacer>
         <c-tooltip
             left
-            tooltip="Crear Usuario"
+            tooltip="Crear Encuesta"
         >
           <v-btn
               color="primary"
@@ -27,19 +27,17 @@
           >
             <template v-slot:tabla="{ items, headers, loading }">
               <v-data-table
-                  v-model="seleccionados"
                   :headers="headers"
                   :items="items"
                   :loading="loading"
                   loading-text="Cargando... por favor espere"
-                  show-select
                   class="elevation-1 rounded-0 mb-12"
                   hide-default-footer
               >
                 <template v-slot:item.opciones="{ item }">
                   <c-tooltip
                       left
-                      tooltip="Editar Usuario"
+                      tooltip="Editar Encuesta"
                   >
                     <v-btn
                         class="ma-1"
@@ -54,7 +52,7 @@
                   </c-tooltip>
                   <c-tooltip
                       left
-                      tooltip="Eliminar Usuario"
+                      tooltip="Eliminar Encuesta"
                   >
                     <v-btn
                         class="ma-1"
@@ -74,7 +72,7 @@
         </v-card>
       </v-col>
     </v-row>
-    <registro-usuario
+    <registro-encuesta
         ref="registroItem"
         @guardado="registroGuardado"
     />
@@ -86,23 +84,20 @@
 </template>
 
 <script>
-import RegistroUsuario from '@/modules/usuarios/components/RegistroUsuario'
-import models from '@/models/models'
-import {mapGetters} from 'vuex'
+import RegistroEncuesta from '@/modules/caracterizacion/components/RegistroEncuesta'
 export default {
   name: 'Encuestas',
   components: {
-    RegistroUsuario
+    RegistroEncuesta
   },
   data: () => ({
     encuesta: null,
-    seleccionados: [],
-    rutaBase: 'users',
+    rutaBase: 'hogares-module/hogares',
     dataTable: {
       buttonZone: false,
       advanceFilters: false,
-      nameItemState: 'tablaUsuarios',
-      route: 'users',
+      nameItemState: 'tablaEncuestas',
+      route: 'hogares-module/hogares',
       makeHeaders: [
         {
           text: 'ID',
@@ -132,37 +127,7 @@ export default {
     },
     seleccionado: null
   }),
-  computed: {
-    ...mapGetters([
-      'riesgosAmbientales',
-      'riesgosPrioritarios'
-    ])
-  },
-  created() {
-    this.encuesta = this.clone(models.caracterizacion.hogar)
-    this.encuesta.caracterizacion = this.clone(models.caracterizacion.caracterizacionHogar)
-    this.encuesta.uso_espacios = this.clone(models.caracterizacion.usoEspacios)
-    this.riesgosAmbientales.forEach(x => {
-      let data =this.clone(models.caracterizacion.riesgoAmbiental)
-      data.riesgo = x
-      data.riesgo_ambiental_id = x.id
-      this.encuesta.riesgos_ambientales.push(data)
-    })
-    this.encuesta.personas.push(this.nuevaPersona())
-  },
   methods: {
-    nuevaPersona() {
-      let persona = this.clone(models.caracterizacion.persona)
-      persona.caracterizacion = this.clone(models.caracterizacion.caracterizacionPersona)
-      this.riesgosPrioritarios.forEach(x => {
-        let data =this.clone(models.caracterizacion.riesgoPrioritario)
-        data.riesgo = x
-        data.riesgo_prioritario_id = x.id
-        persona.riesgos_prioritarios.push(data)
-      })
-      persona.anfitrion = !this.encuesta.personas.length ? 1 : 0
-      return persona
-    },
     crearRegistro() {
       this.$refs.registroItem.open()
     },
@@ -171,10 +136,10 @@ export default {
     },
     preEliminarRegistro(registro) {
       this.seleccionado = registro
-      this.$refs.cdialog.open(`¿Está seguro de eliminar el registro del usuario <strong>${this.seleccionado.name}</strong>?`)
+      this.$refs.cdialog.open(`¿Está seguro de eliminar el registro de la encuesta <strong>${this.seleccionado.ficha}</strong>?`)
     },
     eliminarRegistro() {
-      this.$store.dispatch('eliminarUsuario', this.seleccionado.id)
+      this.$store.dispatch('eliminarEncuesta', this.seleccionado.id)
           .then(resolve => {
             if (resolve) {
               this.registroGuardado()
@@ -185,7 +150,7 @@ export default {
           })
     },
     registroGuardado() {
-      this.$store.commit('RELOAD_TABLA', 'tablaUsuarios')
+      this.$store.commit('RELOAD_TABLA', 'tablaEncuestas')
     }
   }
 }

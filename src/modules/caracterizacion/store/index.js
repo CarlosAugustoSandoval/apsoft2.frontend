@@ -78,6 +78,19 @@ const actions = {
             .catch(error => {
                 context.commit('SET_SNACKBAR', { color: 'error', message: `Error al pedir los complementos de caracterización.`, error: error })
             })
+    },
+    async eliminarEncuesta(context, id) {
+        return await new Promise(resolve => {
+            Vue.axios.delete(`hogares-module/hogares/${id}`)
+                .then(() => {
+                    context.commit('SET_SNACKBAR', { color: 'success', message: 'Encuesta eliminada correctamente.' })
+                    resolve(true)
+                })
+                .catch(error => {
+                    context.commit('SET_SNACKBAR', { color: 'error', message: 'Error al eliminar el registro de la encuesta.', error: error })
+                    resolve(false)
+                })
+        })
     }
 }
 
