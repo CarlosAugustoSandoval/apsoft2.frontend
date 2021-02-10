@@ -15,6 +15,7 @@
     <v-divider/>
     <v-card-actions>
       <v-btn
+          x-large
           :disabled="step === 1"
           text
           @click="$emit('atras')"
@@ -23,6 +24,7 @@
       </v-btn>
       <v-spacer/>
       <v-btn
+          x-large
           color="primary"
           depressed
           @click="$emit('siguiente', referencia)"

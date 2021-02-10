@@ -102,8 +102,8 @@ import {mapGetters} from 'vuex'
 import models from '@/models/models'
 import FormIdentificacionHogar from '@/modules/caracterizacion/components/registroEncuesta/forms/FormIdentificacionHogar'
 import FormEntornoHogar from '@/modules/caracterizacion/components/registroEncuesta/forms/FormEntornoHogar'
-import ItemWindows from "./registroEncuesta/ItemWindows";
-import FomrPersonas from "./registroEncuesta/forms/FormPersonas";
+import ItemWindows from './registroEncuesta/ItemWindows'
+import FomrPersonas from './registroEncuesta/forms/FormPersonas'
 export default {
   name: 'RegistroEncuesta',
   components: {
@@ -116,8 +116,7 @@ export default {
     step: 1,
     loading: false,
     dialog: false,
-    encuesta: null,
-    forms: []
+    encuesta: null
   }),
   computed: {
     ...mapGetters([
@@ -185,10 +184,6 @@ export default {
         this.encuesta.personas.push(this.nuevaPersona())
         this.encuesta.ficha = `${this.user.id}-${this.moment().format('DDMMYYYYHHmm')}`
       }
-      this.forms = [
-        { title: 'Identificación del Hogar', referencia: 'formIdentificacionHogar', componente: FormIdentificacionHogar },
-        { title: 'Entorno del Hogar', referencia: 'formEntornoHogar', componente: FormEntornoHogar }
-      ]
       this.dialog = true
     },
     nuevaPersona() {

@@ -1,20 +1,17 @@
 <template>
   <v-row v-if="encuesta">
     <v-col cols="12">
-      <v-card outlined>
-        <v-card-text>
-          <c-radio
-              v-model="encuesta.zona"
-              label="Zona"
-              name="Zona"
-              rules="required"
-              :items="zonas"
-              item-text="text"
-              item-value="value"
-              :column="!$vuetify.breakpoint.smAndUp"
-          />
-        </v-card-text>
-      </v-card>
+      <c-radio
+          v-model="encuesta.zona"
+          label="Zona"
+          name="Zona"
+          rules="required"
+          :items="zonas"
+          item-text="text"
+          item-value="value"
+          :dense="false"
+          :column="!$vuetify.breakpoint.smAndUp"
+      />
     </v-col>
     <v-col cols="12">
       <c-text
@@ -22,6 +19,7 @@
           label="Dirección"
           name="Dirección"
           rules="required"
+          :dense="false"
       />
     </v-col>
   </v-row>

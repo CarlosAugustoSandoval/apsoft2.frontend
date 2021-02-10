@@ -5,6 +5,7 @@
             :value="encuesta.ficha"
             label="Número de Ficha"
             readonly
+            :dense="false"
         />
       </v-col>
       <v-col cols="12">
@@ -14,6 +15,7 @@
             name="Fecha Diligenciamiento"
             rules="required"
             :max="moment().format('YYYY-MM-DD')"
+            :dense="false"
         />
       </v-col>
       <v-col cols="12">
@@ -25,6 +27,7 @@
             :items="departamentos"
             item-text="nombre"
             item-value="codigo_dane"
+            :dense="false"
         />
       </v-col>
       <v-col cols="12">
@@ -37,6 +40,7 @@
             :items="departamentos.length && encuesta.codigo_departamento ? departamentos.find(x => x.codigo_dane === encuesta.codigo_departamento).municipios : []"
             item-text="nombre"
             item-value="codigo_dane"
+            :dense="false"
         />
       </v-col>
       <v-col cols="12">
@@ -48,6 +52,7 @@
             :items="barrios"
             item-text="nombre"
             item-value="id"
+            :dense="false"
         />
       </v-col>
       <!--    <v-col cols="12">-->
