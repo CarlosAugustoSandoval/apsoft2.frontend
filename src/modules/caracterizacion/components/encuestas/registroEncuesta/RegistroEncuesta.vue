@@ -100,10 +100,10 @@
 <script>
 import {mapGetters} from 'vuex'
 import models from '@/models/models'
-import FormIdentificacionHogar from '@/modules/caracterizacion/components/registroEncuesta/forms/FormIdentificacionHogar'
-import FormEntornoHogar from '@/modules/caracterizacion/components/registroEncuesta/forms/FormEntornoHogar'
-import ItemWindows from './registroEncuesta/ItemWindows'
-import FomrPersonas from './registroEncuesta/forms/FormPersonas'
+import FormIdentificacionHogar from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormIdentificacionHogar'
+import FormEntornoHogar from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormEntornoHogar'
+import ItemWindows from '@/modules/caracterizacion/components/encuestas/registroEncuesta/ItemWindows'
+import FomrPersonas from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormPersonas'
 export default {
   name: 'RegistroEncuesta',
   components: {

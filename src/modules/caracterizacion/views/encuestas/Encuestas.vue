@@ -84,7 +84,7 @@
 </template>
 
 <script>
-import RegistroEncuesta from '@/modules/caracterizacion/components/RegistroEncuesta'
+import RegistroEncuesta from '@/modules/caracterizacion/components/encuestas/registroEncuesta/RegistroEncuesta'
 export default {
   name: 'Encuestas',
   components: {
