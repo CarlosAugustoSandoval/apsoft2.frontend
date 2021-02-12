@@ -15,7 +15,7 @@
     </v-col>
     <v-col cols="12">
       <c-text
-          :value="encuesta.direccion"
+          v-model="encuesta.direccion"
           label="Dirección"
           name="Dirección"
           rules="required"

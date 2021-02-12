@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import caracterizacion from '../db/Caracterizacion'
 
 // state
 const state = {
@@ -70,6 +71,33 @@ const getters = {
 
 // actions
 const actions = {
+    async guardarEncuestaLocal (context, encuesta) {
+        if (!encuesta.idd) context.commit('SET_DATOS_UBICACION', encuesta)
+        return await caracterizacion.encuestas[encuesta.idd ? 'put' : 'add'](encuesta)
+            .then(() => {
+                return true
+            })
+            .catch(() => {
+                context.commit('SET_SNACKBAR', { color: 'error', message: 'Error al guardar la encuesta.' })
+                return false
+            })
+    },
+    async eliminarEncuestaLocal (context, idd) {
+        if (idd) {
+            return await caracterizacion.encuestas.delete(idd)
+                .then(() => {
+                    context.commit('SET_SNACKBAR', { color: 'success', message: 'La Encuesta se eliminó correctamente.' })
+                    return true
+                })
+                .catch(() => {
+                    context.commit('SET_SNACKBAR', { color: 'error', message: 'Error al eliminar la encuesta.' })
+                    return false
+                })
+        }
+    },
+    async getPendientes () {
+        return await caracterizacion.encuestas.toCollection().reverse().toArray()
+    },
     getComplementosCaraterizacion (context) {
         Vue.axios.get('hogares-module/complementos')
             .then(response => {

@@ -16,6 +16,7 @@ import complementos from '@/modules/complementos/store'
 import usuarios from '@/modules/usuarios/store'
 import roles from '@/modules/roles/store'
 import caracterizacion from '@/modules/caracterizacion/store'
+import caracterizacionLocal from '@/modules/caracterizacion/store/local'
 
 Vue.use(Vuex)
 
@@ -38,9 +39,10 @@ export default new Vuex.Store({
     // Externos
     usuarios,
     roles,
-    caracterizacion
+    caracterizacion,
+    caracterizacionLocal
   },
   plugins: [createPersistedState({
-    paths: ['theme','auth']
+    paths: ['theme','auth','caracterizacionLocal']
   })]
 })

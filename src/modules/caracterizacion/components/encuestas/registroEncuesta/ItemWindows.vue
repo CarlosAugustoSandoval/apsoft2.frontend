@@ -1,13 +1,15 @@
 <template>
   <v-window-item :value="step">
     <v-card-title class="title font-weight-regular justify-space-between">
-      <span>{{ title }}</span>
-      <v-avatar
-          color="primary lighten-2"
-          class="subheading white--text"
-          size="24"
-          v-text="step"
-      ></v-avatar>
+      <span>
+        <v-avatar
+            color="primary lighten-2"
+            class="subheading white--text mb-1"
+            size="24"
+            v-text="step"
+        />
+        {{ title }}
+      </span>
     </v-card-title>
     <v-card-text>
       <slot/>

@@ -16,9 +16,9 @@
       >
         <v-toolbar-title>
           <v-avatar color="primary darken-3">
-            <v-icon>mdi-file-{{ encuesta && encuesta.ficha ? 'edit' : 'plus' }}</v-icon>
+            <v-icon>mdi-file-{{ encuesta && (encuesta.id || encuesta.idd) ? 'edit' : 'plus' }}</v-icon>
           </v-avatar>
-          {{ encuesta && encuesta.id ? 'Edición de' : 'Nueva' }} Encuesta
+          {{ encuesta && (encuesta.id || encuesta.idd) ? 'Edición de' : 'Nueva' }} Encuesta
         </v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn
@@ -41,33 +41,44 @@
                     <item-windows
                         :step="1"
                         title="Identificación del Hogar"
-                        referencia="formulario"
+                        referencia="formIdentificacionHogar"
                         @atras="step--"
                         @siguiente="val => siguiente(val)"
                     >
-                      <ValidationObserver ref="formulario" autocomplete="off">
+                      <ValidationObserver ref="formIdentificacionHogar" autocomplete="off">
                         <form-identificacion-hogar :encuesta="encuesta"/>
                       </ValidationObserver>
                     </item-windows>
                     <item-windows
                         :step="2"
                         title="Entorno del Hogar"
-                        referencia="formulario2"
+                        referencia="formEntornoHogar"
                         @atras="step--"
                         @siguiente="val => siguiente(val)"
                     >
-                      <ValidationObserver ref="formulario2" autocomplete="off">
+                      <ValidationObserver ref="formEntornoHogar" autocomplete="off">
                         <form-entorno-hogar :encuesta="encuesta"/>
                       </ValidationObserver>
                     </item-windows>
                     <item-windows
                         :step="3"
-                        title="Personas"
-                        referencia="formulario3"
+                        title="Integrante que Recibe la Visita"
+                        referencia="formAnfitrion"
                         @atras="step--"
                         @siguiente="val => siguiente(val)"
                     >
-                      <ValidationObserver ref="formulario3" autocomplete="off">
+                      <ValidationObserver ref="formAnfitrion" autocomplete="off">
+                        <form-anfitrion :encuesta="encuesta" :anfitrion="encuesta.personas[0]"/>
+                      </ValidationObserver>
+                    </item-windows>
+                    <item-windows
+                        :step="4"
+                        title="Personas Encuestadas"
+                        referencia="formPersonas"
+                        @atras="step--"
+                        @siguiente="val => siguiente(val)"
+                    >
+                      <ValidationObserver ref="formPersonas" autocomplete="off">
                         <fomr-personas :encuesta="encuesta"/>
                       </ValidationObserver>
                     </item-windows>
@@ -104,9 +115,11 @@ import FormIdentificacionHogar from '@/modules/caracterizacion/components/encues
 import FormEntornoHogar from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormEntornoHogar'
 import ItemWindows from '@/modules/caracterizacion/components/encuestas/registroEncuesta/ItemWindows'
 import FomrPersonas from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormPersonas'
+import FormAnfitrion from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormAnfitrion'
 export default {
   name: 'RegistroEncuesta',
   components: {
+    FormAnfitrion,
     FomrPersonas,
     ItemWindows,
     FormIdentificacionHogar,
@@ -129,8 +142,10 @@ export default {
   },
   methods: {
     siguiente(referencia) {
-      this.$refs[referencia].validate().then(result => {
+      this.$refs[referencia].validate().then(async result => {
         if (result) {
+          await this.$store.dispatch('guardarEncuestaLocal', this.encuesta)
+          this.$emit('guardado', this.encuesta)
           this.step++
         }
       })
@@ -186,6 +201,10 @@ export default {
       }
       this.dialog = true
     },
+    openPendiente(registro) {
+      this.encuesta = this.clone(registro)
+      this.dialog = true
+    },
     nuevaPersona() {
       let persona = this.clone(models.caracterizacion.persona)
       persona.caracterizacion = this.clone(models.caracterizacion.caracterizacionPersona)
@@ -200,6 +219,7 @@ export default {
     },
     close() {
       this.dialog = false
+      this.$emit('close', this.encuesta)
       setTimeout(() => {
         this.loading = false
         this.encuesta = null
