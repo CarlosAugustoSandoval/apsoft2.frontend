@@ -73,28 +73,6 @@
                     </item-windows>
                     <item-windows
                         :step="4"
-                        title="Uso de los Espacios de la Vivienda"
-                        referencia="formUsoEspacios"
-                        @atras="step--"
-                        @siguiente="val => siguiente(val)"
-                    >
-                      <ValidationObserver ref="formUsoEspacios" autocomplete="off">
-                        <form-uso-espacios :encuesta="encuesta"/>
-                      </ValidationObserver>
-                    </item-windows>
-                    <item-windows
-                        :step="5"
-                        title="Riesgos Ambientales de la Vivienda"
-                        referencia="FormRiesgosAmbientales"
-                        @atras="step--"
-                        @siguiente="val => siguiente(val)"
-                    >
-                      <ValidationObserver ref="FormRiesgosAmbientales" autocomplete="off">
-                        <form-riesgos-ambientales :encuesta="encuesta"/>
-                      </ValidationObserver>
-                    </item-windows>
-                    <item-windows
-                        :step="6"
                         title="Personas Encuestadas"
                         referencia="formPersonas"
                         @atras="step--"
@@ -138,9 +116,6 @@ import FormEntornoHogar from '@/modules/caracterizacion/components/encuestas/reg
 import ItemWindows from '@/modules/caracterizacion/components/encuestas/registroEncuesta/ItemWindows'
 import FomrPersonas from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormPersonas'
 import FormAnfitrion from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormAnfitrion'
-import FormUsoEspacios from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormUsoEspacios'
-import FormRiesgosAmbientales from '@/modules/caracterizacion/components/encuestas/registroEncuesta/forms/FormRiesgosAmbientales'
-
 export default {
   name: 'RegistroEncuesta',
   components: {
@@ -148,16 +123,13 @@ export default {
     FomrPersonas,
     ItemWindows,
     FormIdentificacionHogar,
-    FormEntornoHogar,
-    FormUsoEspacios,
-    FormRiesgosAmbientales
+    FormEntornoHogar
   },
   data: () => ({
     step: 1,
     loading: false,
     dialog: false,
-    encuesta: null,
-    grupoTemporal: ''
+    encuesta: null
   }),
   computed: {
     ...mapGetters([
@@ -212,21 +184,15 @@ export default {
           })
     },
     open(encuesta = null) {
-      if (encuesta && encuesta.id) {
+      if (encuesta) {
         this.getEncuesta(encuesta.id)
       } else {
         this.encuesta = this.clone(models.caracterizacion.hogar)
         this.encuesta.caracterizacion = this.clone(models.caracterizacion.caracterizacionHogar)
         this.encuesta.uso_espacios = this.clone(models.caracterizacion.usoEspacios)
-        this.encuesta.hogares_subsidio = this.clone(models.caracterizacion.hogar.hogares_subsidio)
         this.riesgosAmbientales.forEach(x => {
           let data =this.clone(models.caracterizacion.riesgoAmbiental)
           data.riesgo = x
-          if(this.grupoTemporal !== x.grupo){
-            this.grupoTemporal = x.grupo
-          }else{
-            data.riesgo.grupo = null
-          }
           data.riesgo_ambiental_id = x.id
           this.encuesta.riesgos_ambientales.push(data)
         })
@@ -253,7 +219,6 @@ export default {
     },
     close() {
       this.dialog = false
-      this.step = 1
       this.$emit('close', this.encuesta)
       setTimeout(() => {
         this.loading = false

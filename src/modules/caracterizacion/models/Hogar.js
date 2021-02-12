@@ -11,7 +11,7 @@ const Hogar = {
     riesgos_ambientales: [],
     caracterizacion: null,
     uso_espacios: null,
-    hogares_subsidio: null,
+    hogares_subsidio: [],
     personas: []
 }
 

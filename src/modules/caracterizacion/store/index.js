@@ -17,7 +17,9 @@ const state = {
     vinculaciones: [],
     hechosVictimizantes: [],
     riesgosAmbientales: [],
-    riesgosPrioritarios: []
+    riesgosPrioritarios: [],
+    tiposTenencia: [],
+    subsidios: []
 }
 
 // getters
@@ -66,6 +68,12 @@ const getters = {
     },
     riesgosPrioritarios: state => {
         return state.riesgosPrioritarios
+    },
+    tiposTenencia: state => {
+        return state.tiposTenencia
+    },
+    subsidios: state => {
+        return state.subsidios
     }
 }
 
@@ -127,6 +135,7 @@ const mutations = {
     SET_COMPLEMENTOS_CARACTERIZACION (state, data) {
         state.tiposFamilia = data.caracterizacion_hogares_respuestas.tipo_familia
         state.tiposVivienda = data.caracterizacion_hogares_respuestas.tipo_vivienda
+        state.tiposTenencia = data.caracterizacion_hogares_respuestas.tenencia
         state.cursosVida = data.caracterizacion_personas_respuestas.curso_de_vida
         state.discapacidades = data.caracterizacion_personas_respuestas.discapacidad
         state.estadosCiviles = data.caracterizacion_personas_respuestas.estado_civil
@@ -140,6 +149,7 @@ const mutations = {
         state.hechosVictimizantes = data.hechos_victimizantes
         state.riesgosAmbientales = data.riesgos_ambientales
         state.riesgosPrioritarios = data.riesgos_prioritarios
+        state.subsidios = data.subsidios
     }
 }
 
