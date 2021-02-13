@@ -18,6 +18,18 @@
             :dense="false"
         />
       </v-col>
+    <v-col cols="12">
+      <c-radio
+          v-model="encuesta.indigena"
+          label="Familia Indigena"
+          name="Familia Indigena"
+          rules="required"
+          :items="[{ text: 'SI', value: 1 }, { text: 'NO', value: 0 } ]"
+          item-text="text"
+          item-value="value"
+          :dense="false"
+      />
+    </v-col>
       <v-col cols="12">
         <c-select-complete
             v-model="encuesta.codigo_departamento"
@@ -55,30 +67,28 @@
             :dense="false"
         />
       </v-col>
-      <!--    <v-col cols="12">-->
-      <!--      <v-card outlined>-->
-      <!--        <v-card-text>-->
-      <!--          <c-radio-->
-      <!--              v-model="encuesta.zona"-->
-      <!--              label="Zona"-->
-      <!--              name="Zona"-->
-      <!--              rules="required"-->
-      <!--              :items="zonas"-->
-      <!--              item-text="text"-->
-      <!--              item-value="value"-->
-      <!--              :column="!$vuetify.breakpoint.smAndUp"-->
-      <!--          />-->
-      <!--        </v-card-text>-->
-      <!--      </v-card>-->
-      <!--    </v-col>-->
-      <!--    <v-col cols="12">-->
-      <!--      <c-text-->
-      <!--          :value="encuesta.direccion"-->
-      <!--          label="Dirección"-->
-      <!--          name="Dirección"-->
-      <!--          rules="required"-->
-      <!--      />-->
-      <!--    </v-col>-->
+    <v-col cols="12">
+      <c-radio
+          v-model="encuesta.zona"
+          label="Zona"
+          name="Zona"
+          rules="required"
+          :items="zonas"
+          item-text="text"
+          item-value="value"
+          :dense="false"
+          :column="!$vuetify.breakpoint.smAndUp"
+      />
+    </v-col>
+    <v-col cols="12">
+      <c-text
+          v-model="encuesta.direccion"
+          label="Dirección"
+          name="Dirección"
+          rules="required"
+          :dense="false"
+      />
+    </v-col>
   </v-row>
 </template>
 

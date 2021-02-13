@@ -31,7 +31,7 @@
           depressed
           @click="$emit('siguiente', referencia)"
       >
-        Siguiente
+        {{ textButton }}
       </v-btn>
     </v-card-actions>
   </v-window-item>
@@ -52,6 +52,10 @@ name: 'ItemWindows',
     referencia: {
       type: String,
       default: ''
+    },
+    textButton: {
+      type: String,
+      default: 'Siguiente'
     },
   }
 }

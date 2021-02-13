@@ -34,7 +34,7 @@
                     depressed
                     fab
                     x-small
-                    @click.stop="editarPersona(persona)"
+                    @click.stop="editarPersona({index: indexPersona, persona: persona})"
                 >
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>
@@ -69,18 +69,28 @@
             depressed
             fab
             large
+            @click="crearPersona"
         >
           <v-icon>mdi-plus</v-icon>
         </v-btn>
       </c-tooltip>
     </v-col>
+    <registro-persona
+        ref="registroPersona"
+        @guardado="val => personaGuardada(val)"
+        @close="indexPersonaSeleccionada = null"
+    />
   </v-row>
 </template>
 
 <script>
 
+import RegistroPersona from '../RegistroPersona'
 export default {
   name: 'FomrPersonas',
+  components: {
+    RegistroPersona
+  },
   props: {
     encuesta: {
       type: Object,
@@ -92,11 +102,22 @@ export default {
     }
   },
   data: () => ({
-    click: false
+    click: false,
+    indexPersonaSeleccionada: null
   }),
   methods: {
-    editarPersona(persona) {
-      console.log('persona', persona)
+    personaGuardada(persona) {
+      this.encuesta.personas.splice(this.indexPersonaSeleccionada || 0, this.indexPersonaSeleccionada !== null ? 1 : 0, persona)
+      if(this.indexPersonaSeleccionada === null) this.indexPersonaSeleccionada = 0
+      this.$emit('personaGuardada')
+    },
+    crearPersona() {
+      this.$refs.registroPersona.open()
+      this.indexPersonaSeleccionada = null
+    },
+    editarPersona(data) {
+      this.indexPersonaSeleccionada = data.index
+      this.$refs.registroPersona.open(data.persona)
     },
     preEliminarPersona(persona) {
       console.log('persona', persona)

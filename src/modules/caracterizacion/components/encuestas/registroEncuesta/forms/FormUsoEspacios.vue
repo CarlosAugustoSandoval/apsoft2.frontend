@@ -18,6 +18,7 @@
                   name="número de dormitorios"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -27,6 +28,7 @@
                   name="número de personas"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
           </v-row>
@@ -51,6 +53,7 @@
                   name="cantidad de perros"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -60,6 +63,7 @@
                   name="cantidad de gatos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col class="mx-auto" cols="6">
@@ -69,6 +73,7 @@
                   name="cantidad otros animales"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="12" v-if="encuesta.uso_espacios.cant_otros_animales">
@@ -102,6 +107,7 @@
                   name="perro"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -111,6 +117,7 @@
                   name="gatos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
           </v-row>
@@ -135,6 +142,7 @@
                   name="bovinos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -144,6 +152,7 @@
                   name="porcinos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -153,6 +162,7 @@
                   name="caprinos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -162,6 +172,7 @@
                   name="equinos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -171,6 +182,7 @@
                   name="ovinos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -180,6 +192,7 @@
                   name="especies menores"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -189,6 +202,7 @@
                   name="animales exoticos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="6">
@@ -198,6 +212,7 @@
                   name="otros no domesticos"
                   rules="required"
                   :dense="false"
+                  step="1"
               />
             </v-col>
             <v-col cols="12" v-if="encuesta.uso_espacios.otros_no_domesticos">

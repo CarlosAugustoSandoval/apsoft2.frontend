@@ -112,7 +112,7 @@ export default {
           })
     },
     registroGuardado(registro) {
-      this.$refs.encuestasPendientes.getRegistros()
+      if(this.$refs.encuestasPendientes) this.$refs.encuestasPendientes.getRegistros()
       if(registro.id) this.$store.commit('RELOAD_TABLA', 'tablaEncuestas')
     }
   }

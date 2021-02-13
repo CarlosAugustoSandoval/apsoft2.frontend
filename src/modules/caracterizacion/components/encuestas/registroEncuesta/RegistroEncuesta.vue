@@ -68,7 +68,7 @@
                         @siguiente="val => siguiente(val)"
                     >
                       <ValidationObserver ref="formAnfitrion" autocomplete="off">
-                        <form-anfitrion :encuesta="encuesta" :anfitrion="encuesta.personas[0]"/>
+                        <form-anfitrion :encuesta="encuesta" :anfitrion="encuesta.personas.find(x => x.anfitrion)"/>
                       </ValidationObserver>
                     </item-windows>
                     <item-windows
@@ -99,30 +99,19 @@
                         referencia="formPersonas"
                         @atras="step--"
                         @siguiente="val => siguiente(val)"
+                        text-button="Guardar Encuesta"
                     >
                       <ValidationObserver ref="formPersonas" autocomplete="off">
-                        <fomr-personas :encuesta="encuesta"/>
+                        <fomr-personas
+                            :encuesta="encuesta"
+                            @personaGuardada="guardarEncuestaTemporal"
+                        />
                       </ValidationObserver>
                     </item-windows>
                   </v-window>
                 </v-card>
               </v-col>
             </v-row>
-            <v-divider/>
-            <v-card-actions>
-              <v-btn
-                  @click="close"
-              >
-                Cancelar
-              </v-btn>
-              <v-spacer/>
-              <v-btn
-                  @click="guardar"
-                  color="primary"
-              >
-                Guardar
-              </v-btn>
-            </v-card-actions>
           </v-col>
         </v-row>
       </v-container>
@@ -157,7 +146,8 @@ export default {
     loading: false,
     dialog: false,
     encuesta: null,
-    grupoTemporal: ''
+    grupoTemporal: '',
+    grupoTemporalPersona: ''
   }),
   computed: {
     ...mapGetters([
@@ -169,34 +159,53 @@ export default {
   watch: {
   },
   methods: {
+    async guardarEncuestaTemporal() {
+      await this.$store.dispatch('guardarEncuestaLocal', this.encuesta)
+      this.$emit('guardado', this.encuesta)
+      return true
+    },
     siguiente(referencia) {
       this.$refs[referencia].validate().then(async result => {
         if (result) {
-          await this.$store.dispatch('guardarEncuestaLocal', this.encuesta)
-          this.$emit('guardado', this.encuesta)
-          this.step++
+          await this.guardarEncuestaTemporal()
+          if(this.step === 6) {
+            this.guardar()
+          } else {
+            this.step++
+          }
         }
       })
     },
-    guardar () {
-      this.$refs.formulario.validate().then(async result => {
-        if (result) {
-          this.loading = true
-          let copiaData = this.clone(this.encuesta)
-          let request = copiaData.id
-              ? this.axios.put(`hogares-module/hogares/${copiaData.id}`, copiaData)
-              : this.axios.post(`hogares-module/hogares`, copiaData)
-          request
-              .then(response => {
-                this.$emit('guardado', response.data)
-                this.$store.commit('SET_SNACKBAR', {color: 'success', message: `La encuesta se guardo correctamente.`})
-                this.close()
-              })
-              .catch(error => {
-                this.loading = false
-                this.$store.commit('SET_SNACKBAR', {color: 'error', message: `Error al guardar la encuesta.`, error: error})
-              })
-        }
+    validarEncuesta() {
+      return true
+    },
+    async guardar () {
+      if(await this.validarEncuesta()) {
+        this.loading = true
+        let copiaData = this.clone(this.encuesta)
+        if(!copiaData.id) delete copiaData.id
+        let request = copiaData.id
+            ? this.axios.put(`hogares-module/hogares/${copiaData.id}`, copiaData)
+            : this.axios.post(`hogares-module/hogares`, copiaData)
+        request
+            .then(async response => {
+              this.$store.commit('SET_SNACKBAR', {color: 'success', message: `La encuesta se guardo correctamente.`})
+              if(response.data && response.data.id) await this.borrarTemporal(copiaData)
+              this.$emit('guardado', response.data)
+              this.close()
+            })
+            .catch(error => {
+              this.loading = false
+              this.$store.commit('SET_SNACKBAR', {color: 'error', message: `Error al guardar la encuesta.`, error: error})
+            })
+      }
+    },
+    async borrarTemporal(temporal) {
+      return await new Promise(resolve => {
+        this.$store.dispatch('eliminarEncuestaLocal', temporal.idd)
+            .then(response => {
+              resolve(response)
+            })
       })
     },
     getEncuesta (id) {
@@ -245,6 +254,11 @@ export default {
       this.riesgosPrioritarios.forEach(x => {
         let data =this.clone(models.caracterizacion.riesgoPrioritario)
         data.riesgo = x
+        if(this.grupoTemporalPersona !== x.grupo){
+          this.grupoTemporalPersona = x.grupo
+        }else{
+          data.riesgo.grupo = null
+        }
         data.riesgo_prioritario_id = x.id
         persona.riesgos_prioritarios.push(data)
       })

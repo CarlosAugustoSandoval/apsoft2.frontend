@@ -1,5 +1,5 @@
 <template>
-  <ValidationProvider :name="name" :rules="rules" v-slot="{ errors, validated, invalid }">
+  <ValidationProvider :name="name" :vid="vid" :rules="rules" v-slot="{ errors, validated, invalid }">
     <v-card
         outlined
         class="mb-2"
@@ -82,6 +82,10 @@ export default {
       default: null
     },
     name: {
+      type: String,
+      default: null
+    },
+    vid: {
       type: String,
       default: null
     },

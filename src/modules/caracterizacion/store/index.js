@@ -31,34 +31,54 @@ const getters = {
         return state.tiposVivienda
     },
     cursosVida: state => {
-        return state.cursosVida
+        return state.cursosVida.map(x => {
+            return {text: x, value: x}
+        })
     },
     discapacidades: state => {
-        return state.discapacidades
+        return state.discapacidades.map(x => {
+            return {text: x, value: x}
+        })
     },
     estadosCiviles: state => {
-        return state.estadosCiviles
+        return state.estadosCiviles.map(x => {
+            return {text: x, value: x}
+        })
     },
     generos: state => {
-        return state.generos
+        return state.generos.map(x => {
+            return {text: x, value: x}
+        })
     },
     gruposEtnicos: state => {
-        return state.gruposEtnicos
+        return state.gruposEtnicos.map(x => {
+            return {text: x, value: x}
+        })
     },
     ocupaciones: state => {
-        return state.ocupaciones
+        return state.ocupaciones.map(x => {
+            return {text: x, value: x}
+        })
     },
     orientaciones: state => {
-        return state.orientaciones
+        return state.orientaciones.map(x => {
+            return {text: x, value: x}
+        })
     },
     sexos: state => {
-        return state.sexos
+        return state.sexos.map(x => {
+            return {text: x, value: x}
+        })
     },
     tiposAfiliacion: state => {
-        return state.tiposAfiliacion
+        return state.tiposAfiliacion.map(x => {
+            return {text: x, value: x}
+        })
     },
     vinculaciones: state => {
-        return state.vinculaciones
+        return state.vinculaciones.map(x => {
+            return {text: x, value: x}
+        })
     },
     hechosVictimizantes: state => {
         return state.hechosVictimizantes
