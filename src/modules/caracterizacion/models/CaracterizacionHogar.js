@@ -2,7 +2,7 @@ const CaracterizacionHogar = {
     hogar_id: null,
     tipo_vivienda: null,
     otro_tipo_vivienda: null,
-    tendencia: null,
+    tenencia: null,
     otra_tenencia: null,
     nombre_institucion: null,
     tipo_familia: null,
