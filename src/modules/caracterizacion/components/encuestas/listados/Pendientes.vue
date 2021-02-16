@@ -32,31 +32,35 @@
             </v-list-item>
           </td>
           <td>
-            <v-list-item class="pa-0" v-if="item">
-              <v-card color="transparent" class="elevation-0">
-                <v-icon large>{{ item.sexo === 'Mujer' ? 'mdi mdi-face' : 'mdi mdi-face-woman'}}</v-icon>
-                <v-card-actions class="py-0 px-1" v-if="typeof item.cantidad_personas !== 'undefined'">
-                  <v-chip color="primary" class="font-weight-bold pl-2 pr-1" label x-small>
-                    <v-icon left x-small>mdi-account-group</v-icon>
-                    <p class="ma-0 align-center">{{ item.cantidad_personas || '0' }}</p>
-                  </v-chip>
-                </v-card-actions>
-              </v-card>
-              <v-list-item-content class="py-1">
-                <v-list-item-title class="body-2">{{ item.nombre_anfitrion }}</v-list-item-title>
-                <v-list-item-subtitle class="body-2">
-                  {{ item.tipo_identificacion }} {{ item.identificacion_anfitrion }}
-                  {{ item.celular ? ', Cel. ' + item.celular : '' }}
-                </v-list-item-subtitle>
-                <v-list-item-subtitle class="body-2">{{ item.anfitrion ? "Anfitrion" : '' }}</v-list-item-subtitle>
-              </v-list-item-content>
-            </v-list-item>
+            <template v-if="item && item.personas && item.personas.find(x => x.anfitrion === 1)">
+              <v-list-item class="pa-0" v-if="item">
+                <v-card color="transparent" class="elevation-0">
+                  <v-icon large>{{ item.personas.find(x => x.anfitrion === 1).sexo === 'Mujer' ? 'mdi mdi-face' : 'mdi mdi-face-woman'}}</v-icon>
+                  <v-card-actions class="py-0 px-1" v-if="typeof item.personas.length !== '0'">
+                    <v-chip color="primary" class="font-weight-bold pl-2 pr-1" label x-small>
+                      <v-icon left x-small>mdi-account-group</v-icon>
+                      <p class="ma-0 align-center">{{ item.personas.length || '0' }}</p>
+                    </v-chip>
+                  </v-card-actions>
+                </v-card>
+                <v-list-item-content class="py-1">
+                  <v-list-item-title class="body-2">{{ returnNombreCompleto(item.personas.find(x => x.anfitrion === 1)) }}</v-list-item-title>
+                  <v-list-item-subtitle class="body-2">
+                    {{ item.personas.find(x => x.anfitrion === 1).tipo_identificacion }} {{ item.personas.find(x => x.anfitrion === 1).identificacion }}
+                    {{ item.personas.find(x => x.anfitrion === 1).celular ? ', Cel. ' + item.personas.find(x => x.anfitrion === 1).celular : '' }}
+                  </v-list-item-subtitle>
+                  <v-list-item-subtitle class="body-2">Anfitrion</v-list-item-subtitle>
+                </v-list-item-content>
+              </v-list-item>
+            </template>
           </td>
           <td>
             <v-list-item>
               <v-list-item-content>
                 <v-list-item-title class="body-1">
-                  {{ item.municipio + ' - ' + item.departamento + ' | Zona ' + item.zona}}
+                  {{ municipios && municipios.length && item.codigo_municipio ? municipios.find(x => x.codigo_dane === item.codigo_municipio).nombre : '' }} -
+                  {{ departamentos && departamentos.length && item.codigo_departamento ? departamentos.find(x => x.codigo_dane === item.codigo_departamento).nombre : ''}}
+                  {{ ' | Zona ' + item.zona }}
                 </v-list-item-title>
                 <v-list-item-subtitle class="body-2">
                   {{ item.direccion }}
@@ -109,6 +113,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   name: 'Pendientes',
   data: () => ({
@@ -121,6 +127,12 @@ export default {
       },
       immediate: true
     }
+  },
+  computed: {
+    ...mapGetters([
+      'municipios',
+      'departamentos'
+    ])
   },
   created() {
     this.getRegistros()
@@ -136,6 +148,9 @@ export default {
     },
     preEliminarRegistro(registro) {
       this.$emit('preeliminarregistro', registro)
+    },
+    returnNombreCompleto(persona){
+      return [persona.apellido1, persona.apellido2, persona.nombre1, persona.nombre2].filter(x => x).join(' ')
     }
   }
 }

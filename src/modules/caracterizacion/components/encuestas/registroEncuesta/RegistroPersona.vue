@@ -164,6 +164,13 @@ export default {
       if (persona) {
         this.personaOrigina = this.clone(persona)
         this.persona = this.clone(persona)
+        let grupoTemporal = ''
+        let riesgosPrioritarios = []
+        this.persona.riesgos_prioritarios.forEach(x => {
+          if(grupoTemporal !== x.riesgo.grupo){grupoTemporal = x.riesgo.grupo}
+          else{ x.riesgo.grupo = null}
+          riesgosPrioritarios.push(x)})
+        this.persona.riesgos_prioritarios = riesgosPrioritarios
       } else {
         let persona = this.clone(models.caracterizacion.persona)
         persona.caracterizacion = this.clone(models.caracterizacion.caracterizacionPersona)
