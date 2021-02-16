@@ -212,7 +212,14 @@ export default {
       this.loading = true
       this.axios.get(`hogares-module/hogares/${id}`)
           .then(response => {
+            let grupoTemporal = ''
+            let riesgosAmbientales = []
             this.encuesta = response.data
+            this.encuesta.riesgos_ambientales.forEach(x => {
+              if(grupoTemporal !== x.riesgo.grupo){grupoTemporal = x.riesgo.grupo}
+              else{ x.riesgo.grupo = null}
+              riesgosAmbientales.push(x)})
+            this.encuesta.riesgos_ambientales = riesgosAmbientales
             this.loading = false
           })
           .catch(error => {
