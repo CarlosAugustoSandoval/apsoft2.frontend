@@ -84,11 +84,14 @@ export default {
     cantidadPendientes: 0
   }),
   created() {
-    this.$store.dispatch('getPendientes').then(data => {
-      this.cantidadPendientes = data.length
-    })
+    this.traerPendientes()
   },
   methods: {
+    traerPendientes(){
+      this.$store.dispatch('getPendientes').then(data => {
+        this.cantidadPendientes = data.length
+      })
+    },
     crearRegistro() {
       this.$refs.registroItem.open()
     },
@@ -100,10 +103,12 @@ export default {
       this.$refs.cdialog.open(`¿Está seguro de eliminar el registro de la encuesta con ficha <strong>${this.seleccionado.ficha}</strong>?`)
     },
     eliminarRegistro() {
-      let request = this.seleccionado.id ? this.$store.dispatch('eliminarEncuesta', this.seleccionado.id) : this.$store.dispatch('eliminarEncuestaLocal', this.seleccionado.idd)
+      console.log('this.seleccionado', this.seleccionado)
+      let request = this.seleccionado.idd ? this.$store.dispatch('eliminarEncuestaLocal', this.seleccionado.idd) : this.$store.dispatch('eliminarEncuesta', this.seleccionado.id)
       request
           .then(resolve => {
             if (resolve) {
+              console.log('this.seleccionado', this.seleccionado)
               this.registroGuardado(this.seleccionado)
               this.$refs.cdialog.close()
             } else {
@@ -114,6 +119,7 @@ export default {
     registroGuardado(registro) {
       if(this.$refs.encuestasPendientes) this.$refs.encuestasPendientes.getRegistros()
       if(registro.id) this.$store.commit('RELOAD_TABLA', 'tablaEncuestas')
+      this.traerPendientes()
     }
   }
 }

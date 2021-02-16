@@ -101,6 +101,8 @@ const getters = {
 const actions = {
     async guardarEncuestaLocal (context, encuesta) {
         if (!encuesta.idd) context.commit('SET_DATOS_UBICACION', encuesta)
+        let existenteId = encuesta.id ? (await context.dispatch('getPendientes')).find(x => x.id === encuesta.id) : null
+        if(existenteId && existenteId.idd) await caracterizacion.encuestas.delete(existenteId.idd)
         return await caracterizacion.encuestas[encuesta.idd ? 'put' : 'add'](encuesta)
             .then(() => {
                 return true
