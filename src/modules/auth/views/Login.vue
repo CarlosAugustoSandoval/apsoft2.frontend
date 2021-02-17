@@ -1,33 +1,36 @@
 <template>
   <v-row class="ma-0">
     <loading :value="loading"/>
-    <v-col cols="12" md="6" lg="7" xl="8" class="primary d-none d-md-flex align-center justify-center">
-      <v-container>
-        <div class="pa-10">
-          <v-row justify="center">
-            <v-col cols="8" xl="6">
-              <div>
-                <h2
-                    class="display-1 white--text font-weight-medium"
-                >Titulo de portada para la aplicación.</h2>
-                <h6
-                    class="subtitle-1 mt-4 white--text op-5 font-weight-regular"
-                >Subtitulo de portada para la aplicación.</h6>
-                <!--                <v-btn class="mt-4 text-capitalize" x-large outlined color="white">Leer más</v-btn>-->
-              </div>
-            </v-col>
-          </v-row>
-        </div>
-      </v-container>
+    <v-col
+        cols="12"
+        md="6"
+        lg="7"
+        xl="8"
+        class="primary d-none d-md-flex align-center justify-center pa-4"
+        style="background: #FF6707 !important;"
+    >
+      <v-img
+          :aspect-ratio="4/4"
+          max-width="600"
+          src="../../../assets/images/logos/logoMagdalena.jpg"
+      ></v-img>
     </v-col>
     <v-col cols="12" md="6" lg="5" xl="4" class="d-flex align-center py-0">
       <v-container fluid class="py-0">
         <div class="px-10 py-0">
           <v-row justify="center">
             <v-col cols="12" sm="8" md="12" class="py-0">
-              <v-row justify="center">
-                <img v-if="darkMode" src="../../../assets/images/site-logo.png"/>
-                <img v-else src="../../../assets/images/site-dark-logo.png"/>
+              <v-row justify="space-around" align="center">
+                <v-avatar
+                    class="elevation-8 mb-4"
+                    :size="$vuetify.breakpoint.xsOnly ? 180 : 240">
+                  <img src="../../../assets/images/logos/logoMedicoEnCasa.png"/>
+                </v-avatar>
+<!--                <v-list-item-title class="text-h4">-->
+<!--                  Médico en Casa-->
+<!--                </v-list-item-title>-->
+<!--                <img v-if="darkMode" src="../../../assets/images/site-logo.png"/>-->
+<!--                <img v-else src="../../../assets/images/site-dark-logo.png"/>-->
               </v-row>
               <v-row justify="center" class="mb-2 mt-4">
                 <v-col cols="12" class="text-center">

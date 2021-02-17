@@ -19,6 +19,10 @@ export default {
   },
   async beforeCreate() {
     await store.dispatch('getUser')
+  },
+  created() {
+    this.$store.dispatch('getComplementos')
+    this.$store.dispatch('getComplementosCaraterizacion')
   }
 }
 </script>

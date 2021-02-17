@@ -6,6 +6,7 @@ const Hogar = {
     codigo_municipio: null,
     barrio_id: null,
     direccion: null,
+    coordenadas: null,
     zona: null,
     indigena: null,
     riesgos_ambientales: [],

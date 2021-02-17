@@ -49,7 +49,7 @@
             label="Municipio"
             name="Municipio"
             rules="required"
-            :items="departamentos.length && encuesta.codigo_departamento ? departamentos.find(x => x.codigo_dane === encuesta.codigo_departamento).municipios : []"
+            :items="departamentos && departamentos.length && encuesta.codigo_departamento ? departamentos.find(x => x.codigo_dane === encuesta.codigo_departamento).municipios : []"
             item-text="nombre"
             item-value="codigo_dane"
             :dense="false"
@@ -88,6 +88,15 @@
           rules="required"
           :dense="false"
       />
+    </v-col>
+    <v-col cols="12" v-if="esMovil">
+      <c-location
+          v-model="encuesta.coordenadas"
+          label="Coordenadas"
+          :readonly="true"
+          :dense="false"
+      >
+      </c-location>
     </v-col>
   </v-row>
 </template>

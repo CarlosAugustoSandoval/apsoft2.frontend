@@ -1,12 +1,12 @@
 // state
 const state = {
     darkMode: false,
-    themeColor: '#5D92F4',
+    themeColor: '#FF6707',
     themeColors: [
-        '#5D92F4',
-        '#468AB0',
-        '#58B0A0',
-        '#00D0BD'
+        '#FF6707',
+        '#29265D',
+        '#059FFF',
+        '#054CFF'
     ]
 }
 

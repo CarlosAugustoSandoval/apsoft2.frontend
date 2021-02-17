@@ -12,10 +12,6 @@ export default {
   name: 'App',
   components: {
     Customizer
-  },
-  created() {
-    this.$store.dispatch('getComplementos')
-    this.$store.dispatch('getComplementosCaraterizacion')
   }
 }
 </script>

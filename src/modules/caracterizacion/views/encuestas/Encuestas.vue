@@ -38,7 +38,10 @@
             </v-badge>
           </v-tab>
         </v-tabs>
-        <v-tabs-items v-model="tab">
+        <v-tabs-items
+            touchless
+            v-model="tab"
+        >
           <v-tab-item>
             <general
                 @editarregistro="val => editarRegistro(val)"

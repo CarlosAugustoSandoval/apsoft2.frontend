@@ -1,7 +1,19 @@
 <template>
   <v-app-bar app clipped-left clipped-right color="primary" dark>
     <v-toolbar-title class="align-center d-flex">
-      <img src="../../../assets/images/site-logo.png" :width="$vuetify.breakpoint.smAndUp ? 160 : 130" />
+      <v-avatar
+          size="56"
+          class="mr-2"
+      >
+        <img src="../../../assets/images/logos/logoMagdalenaAvatar.png"/>
+      </v-avatar>
+      <v-list-item class="pa-0" style="max-width: 160px !important;">
+        <v-list-item-content class="pa-0">
+          <v-list-item-title class="title">Médico en Casa</v-list-item-title>
+          <v-list-item-title class="caption">La fuerza del cambio</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+<!--      <img src="../../../assets/images/site-logo.png" :width="$vuetify.breakpoint.smAndUp ? 160 : 130" />-->
       <app-menu/>
     </v-toolbar-title>
     <v-spacer />
