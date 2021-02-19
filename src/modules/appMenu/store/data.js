@@ -32,7 +32,7 @@ export const itemsMenu = [
         title: 'Encuestas',
         subtitle: 'Caracterización',
         icon: 'mdi-card-account-details',
-        color: 'purple',
+        color: 'orange',
         routeName: 'EncuestasCaracterizacion',
         typeRoute: 'caracterizacion'
     }

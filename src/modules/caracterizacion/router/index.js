@@ -13,10 +13,10 @@ export default {
                 title: {
                     text: 'Encuestas',
                     icon: 'mdi-card-account-details',
-                    color: 'purple',
+                    color: 'orange',
                     breadcrumbs: [
                         {
-                            text: 'Encuestas',
+                            text: 'Caracterización',
                             disabled: true
                         }
                     ]

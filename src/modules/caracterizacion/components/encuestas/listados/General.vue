@@ -20,7 +20,7 @@
           </v-list-item>
         </template>
         <template v-slot:item.persona="{ item }">
-          <v-list-item>
+          <v-list-item class="pa-0">
             <v-card color="transparent" class="elevation-0">
               <v-icon large>{{ item.sexo === 'Mujer' ? 'mdi mdi-face' : 'mdi mdi-face-woman'}}</v-icon>
               <v-card-actions class="py-0 px-1" v-if="item && (typeof item.cantidad_personas !== 'undefined')">

@@ -107,7 +107,7 @@ export default {
     },
     eliminarRegistro() {
       console.log('this.seleccionado', this.seleccionado)
-      let request = this.seleccionado.idd ? this.$store.dispatch('eliminarEncuestaLocal', this.seleccionado.idd) : this.$store.dispatch('eliminarEncuesta', this.seleccionado.id)
+      let request = this.seleccionado.idd ? this.$store.dispatch('eliminarEncuestaLocal', { idd: this.seleccionado.idd }) : this.$store.dispatch('eliminarEncuesta', this.seleccionado.id)
       request
           .then(resolve => {
             if (resolve) {

@@ -5,7 +5,10 @@
           size="56"
           class="mr-2"
       >
-        <img src="../../../assets/images/logos/logoMagdalenaAvatar.png"/>
+        <img
+            width="120%"
+            src="../../../assets/images/logos/logoMagdalenaAvatar.png"
+        />
       </v-avatar>
       <v-list-item class="pa-0" style="max-width: 160px !important;">
         <v-list-item-content class="pa-0">

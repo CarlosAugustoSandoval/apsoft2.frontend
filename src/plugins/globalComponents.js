@@ -11,7 +11,7 @@ import CTooltip from '@/components/globalComponents/CTooltip'
 import CSelectComplete from '@/components/globalComponents/CSelectComplete'
 import CNumber from '@/components/globalComponents/CNumber'
 import CTextArea from '@/components/globalComponents/CTextArea'
-import CLocation from '@/components/globalComponents/CLocation'
+import CLocation from '@/components/globalComponents/CTextArea'
 
 import CDialog from '@/components/globalComponents/CDialog'
 import ViewTitle from '@/components/globalComponents/ViewTitle'

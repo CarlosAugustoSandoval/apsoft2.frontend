@@ -112,15 +112,15 @@ const actions = {
                 return false
             })
     },
-    async eliminarEncuestaLocal (context, idd) {
-        if (idd) {
-            return await caracterizacion.encuestas.delete(idd)
+    async eliminarEncuestaLocal (context, data) {
+        if (data.idd) {
+            return await caracterizacion.encuestas.delete(data.idd)
                 .then(() => {
-                    context.commit('SET_SNACKBAR', { color: 'success', message: 'La Encuesta se eliminó correctamente.' })
+                    if(!data.notShowMessage) context.commit('SET_SNACKBAR', { color: 'success', message: 'La Encuesta pendiente se eliminó correctamente.' })
                     return true
                 })
                 .catch(() => {
-                    context.commit('SET_SNACKBAR', { color: 'error', message: 'Error al eliminar la encuesta.' })
+                    context.commit('SET_SNACKBAR', { color: 'error', message: 'Error al eliminar la encuesta pendiente.' })
                     return false
                 })
         }
