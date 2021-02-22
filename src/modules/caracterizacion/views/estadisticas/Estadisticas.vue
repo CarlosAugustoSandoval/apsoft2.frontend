@@ -37,7 +37,9 @@
     <v-card>
       <v-tabs v-model="tab">
         <v-tab>Hogares</v-tab>
+        <v-tab>Riesgos Ambientales</v-tab>
         <v-tab>Personas</v-tab>
+        <v-tab>Riesgos Prioritarios</v-tab>
       </v-tabs>
       <v-tabs-items v-model="tab">
         <v-tab-item>
@@ -60,12 +62,24 @@
         <v-tab-item>
           <v-card flat>
             <v-card-text class="text-center text-h6 font-weight-bold">
+              V. Riesgos Ambientales en la Vivienda
+            </v-card-text>
+            <v-card-text>
+              <riesgos-ambientales
+                  :data="hogaresData.riesgosAmbientales"
+              ></riesgos-ambientales>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text class="text-center text-h6 font-weight-bold">
               TOTAL PERSONAS {{ estadisticasPersonas.total }}
             </v-card-text>
             <v-card-text>
               <v-row>
                 <v-col cols="12" sm="12" md="3" lg="3">
-                  <v-list two-line class="notification-wrap">
+                  <v-list class="notification-wrap">
                     <v-list-item-group v-model="currentOption" color="indigo">
                       <template v-for="option in options">
                         <v-hover :key="`option-${ option.value }`">
@@ -94,6 +108,18 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text class="text-center text-h6 font-weight-bold">
+              IDENTIFICACION DE INTEGRANTES DEL HOGAR CON RIESGO PRIORITARIO
+            </v-card-text>
+            <v-card-text>
+              <riesgos-prioritarios
+                  :data="personasData.riesgosPrioritarios"
+              ></riesgos-prioritarios>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
       </v-tabs-items>
     </v-card>
   </v-container>
@@ -103,11 +129,15 @@
 import {mapGetters} from "vuex";
 import HogaresChart from "@/modules/caracterizacion/components/estadisticas/HogaresChart";
 import PersonasChart from "@/modules/caracterizacion/components/estadisticas/PersonasChart";
+import RiesgosAmbientales from "@/modules/caracterizacion/components/estadisticas/RiesgosAmbientales";
+import RiesgosPrioritarios from "@/modules/caracterizacion/components/estadisticas/RiesgosPrioritarios";
 export default {
   name: "Estadisticas",
   components: {
     HogaresChart,
-    PersonasChart
+    PersonasChart,
+    RiesgosAmbientales,
+    RiesgosPrioritarios
   },
   computed: {
     ...mapGetters([
@@ -141,7 +171,7 @@ export default {
       {name: 'Curso de Vida', value: 8, arrayValue: 'cursoVida', applySubstring: false},
       {name: 'Hechos Victimizantes', value: 9, arrayValue: 'hechosVictimizantes', applySubstring: true}
     ],
-    chartSelected: 'sexo'
+    chartSelected: 'sexo',
   }),
   methods: {
     getHogaresEstadisticas(){

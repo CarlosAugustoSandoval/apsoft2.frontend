@@ -10,6 +10,7 @@ const getters = {
         let menuPrincipal = []
         menuPrincipal.push(state.itemsMenu.find(x => x.id === 'inicio'))
         if(getters.permisoName('encuestas-caracterizacion.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'encuestasCaracterizacion'))
+        if(getters.permisoName('estadisticas-caracterizacion.show')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'Estadisticas'))
         if(getters.permisoName('usuarios.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'usuarios'))
         if(getters.permisoName('roles.inicio')) menuPrincipal.push(state.itemsMenu.find(x => x.id === 'roles'))
         return menuPrincipal

@@ -22,6 +22,26 @@ export default {
                     ]
                 }
             }
-        }
+        },
+        {
+            name: 'Estadisticas',
+            path: 'caracterizacion/estadisticas',
+            component: () => import('@/modules/caracterizacion/views/estadisticas/Estadisticas'),
+            meta: {
+                requiresAuth: true,
+                withAccess: 'estadisticas-caracterizacion.show',
+                title: {
+                    text: 'Estadisticas',
+                    icon: 'mdi mdi-chart-scatter-plot',
+                    color: 'purple',
+                    breadcrumbs: [
+                        {
+                            text: 'Estadisticas',
+                            disabled: true
+                        }
+                    ]
+                }
+            }
+        },
     ]
 }

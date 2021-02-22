@@ -35,5 +35,14 @@ export const itemsMenu = [
         color: 'orange',
         routeName: 'EncuestasCaracterizacion',
         typeRoute: 'caracterizacion'
+    },
+    {
+        id: 'Estadisticas',
+        title: 'Estadisticas',
+        subtitle: '',
+        icon: 'mdi mdi-chart-scatter-plot',
+        color: 'purple',
+        routeName: 'Estadisticas',
+        typeRoute: 'caracterizacion'
     }
 ]
