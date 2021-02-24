@@ -113,7 +113,7 @@ export default {
           value: 'diligencia'
         },
         {
-          text: 'Persona',
+          text: 'Anfitrión',
           align: 'left',
           sortable: false,
           value: 'persona'

@@ -5,8 +5,8 @@ const state = {
     themeColors: [
         '#FF6707',
         '#29265D',
-        '#059FFF',
-        '#054CFF'
+        '#347EB5',
+        '#04A6A4'
     ]
 }
 

@@ -10,9 +10,9 @@
             src="../../../assets/images/logos/logoMagdalenaAvatar.png"
         />
       </v-avatar>
-      <v-list-item class="pa-0" style="max-width: 160px !important;">
+      <v-list-item class="pa-0" style="max-width: 174px !important;">
         <v-list-item-content class="pa-0">
-          <v-list-item-title class="title">Médico en Casa</v-list-item-title>
+          <v-list-item-title class="title">Médico en tu casa</v-list-item-title>
           <v-list-item-title class="caption">La fuerza del cambio</v-list-item-title>
         </v-list-item-content>
       </v-list-item>

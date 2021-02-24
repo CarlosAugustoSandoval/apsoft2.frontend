@@ -202,7 +202,7 @@ export default {
     },
     async borrarTemporal(temporal) {
       return await new Promise(resolve => {
-        this.$store.dispatch('eliminarEncuestaLocal', temporal.idd)
+        this.$store.dispatch('eliminarEncuestaLocal', { idd: temporal.idd, notShowMessage: true })
             .then(response => {
               resolve(response)
             })

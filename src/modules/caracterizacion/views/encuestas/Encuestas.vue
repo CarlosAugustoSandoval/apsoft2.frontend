@@ -27,7 +27,7 @@
             v-model="tab"
             align-with-title
         >
-          <v-tabs-slider color="yellow"></v-tabs-slider>
+          <v-tabs-slider color="secondary"></v-tabs-slider>
           <v-tab>Listado general</v-tab>
           <v-tab>
             <v-badge

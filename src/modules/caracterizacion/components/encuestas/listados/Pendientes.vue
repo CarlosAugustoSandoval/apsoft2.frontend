@@ -7,7 +7,7 @@
           Diligenciamiento
         </th>
         <th>
-          Jefe / Anfitrión
+          Anfitrión
         </th>
         <th>
           Ubicación

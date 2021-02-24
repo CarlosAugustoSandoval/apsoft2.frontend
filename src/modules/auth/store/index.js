@@ -5,7 +5,8 @@ const state = {
     expires_at: null,
     token_type: null,
     user: null,
-    server: 'http://localhost:5000/api'
+    // server: 'http://localhost:5000/api'
+    server: 'http://179.50.90.167:8000/api'
 }
 
 // getters
