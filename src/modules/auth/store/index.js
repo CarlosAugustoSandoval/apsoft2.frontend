@@ -6,7 +6,7 @@ const state = {
     token_type: null,
     user: null,
     // server: 'http://localhost:5000/api'
-    server: 'http://www.medicoencasa.selectorplus.com:8000/api'
+    server: 'http://www.medicoencasa.selectorplus.com:8080/api'
 }
 
 // getters
