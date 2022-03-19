@@ -173,11 +173,32 @@ export default {
           } else {
             this.step++
           }
+        } else {
+          this.$store.commit('SET_SNACKBAR', {color: 'error', message: 'Hay errores en el formulario.'})
         }
       })
     },
     validarEncuesta() {
-      return true
+      let messages = []
+      if(!this.encuesta?.personas?.length) {
+        messages.push('*No hay personas registradas en la encuesta.')
+      } else {
+        this.encuesta.personas.forEach(x => {
+          let copiaObjectCaraterizacion = JSON.parse(JSON.stringify(x.caracterizacion))
+          delete copiaObjectCaraterizacion.persona_id
+          const countCaracterizacion = Object.values(copiaObjectCaraterizacion).filter(j => j === null)
+          if(countCaracterizacion.length) messages.push(`*Hay ${countCaracterizacion.length} dato${countCaracterizacion.length === 1 ? '' : 's'} por diligenciar en la caracterización de ${x.nombre1} ${x.apellido1}`)
+
+          const countRiesgosPrioritarios = x.riesgos_prioritarios.map(j => j.respuesta).filter(k => k === null)
+          if(countRiesgosPrioritarios.length) messages.push(`*Hay ${countRiesgosPrioritarios.length} dato${countRiesgosPrioritarios.length === 1 ? '' : 's'} por diligenciar en los riesgos prioritarios de ${x.nombre1} ${x.apellido1}`)
+        })
+      }
+      if(messages.length) {
+        this.$store.commit('SET_SNACKBAR', {color: 'error', message: messages.join('<br/>')})
+        return false
+      } else {
+        return true
+      }
     },
     async guardar () {
       if(await this.validarEncuesta()) {

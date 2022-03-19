@@ -1,5 +1,25 @@
 <template>
   <v-window-item :value="step">
+    <v-card-actions>
+      <v-btn
+          x-large
+          :disabled="step === 1"
+          text
+          @click="$emit('atras')"
+      >
+        Atrás
+      </v-btn>
+      <v-spacer/>
+      <v-btn
+          x-large
+          color="primary"
+          depressed
+          @click="$emit('siguiente', referencia)"
+      >
+        {{ textButton }}
+      </v-btn>
+    </v-card-actions>
+    <v-divider/>
     <v-card-title class="title font-weight-regular justify-space-between">
       <span>
         <v-avatar

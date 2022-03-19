@@ -6,7 +6,7 @@
     :color="color"
     top
   >
-    {{ message }}
+    <p class="ma-0" v-html="message" />
     <template v-slot:action="{ attrs }">
       <v-btn
         icon

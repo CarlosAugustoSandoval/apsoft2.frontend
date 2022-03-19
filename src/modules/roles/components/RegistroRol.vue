@@ -50,7 +50,7 @@
             </ValidationObserver>
           </v-col>
           <v-col cols="12" v-if="rol && rol.id && permissions">
-            <v-subheader style="height: 24px !important;" class="title mb-2">
+            <v-subheader style="height: 24px !important;" class="title">
               <v-icon left>mdi-key</v-icon>
               Permisos
             </v-subheader>

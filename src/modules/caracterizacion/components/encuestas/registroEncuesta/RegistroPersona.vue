@@ -136,6 +136,8 @@ export default {
           } else {
             this.step++
           }
+        } else {
+          this.$store.commit('SET_SNACKBAR', {color: 'error', message: 'Hay errores en el formulario.'})
         }
       })
     },
